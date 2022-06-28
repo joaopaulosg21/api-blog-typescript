@@ -3,6 +3,8 @@ import { UserController } from "../User/userController";
 const user = new UserController();
 const userRouter = Router();
 
-userRouter.post("/new",(req,res)=>user.newUserRoute(req,res));
+userRouter.post("/new",(req,res)=>{
+    user.newUserRoute(req,res)
+});
 
 export { userRouter };
