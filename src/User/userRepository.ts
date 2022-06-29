@@ -20,4 +20,8 @@ export class UserRepository {
     public async returnEmail(email:string):Promise<user | null>{
         return this.model.user.findUnique({where:{email:email}});
     }
+
+    public async login(email:string,password:string):Promise<user | null>{
+        return this.model.user.findFirst({where:{email:email,password:password}});
+    }
 }

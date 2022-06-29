@@ -7,4 +7,8 @@ userRouter.post("/new",(req,res)=>{
     user.newUserRoute(req,res)
 });
 
+userRouter.post("/login",(req,res)=>{
+    user.loginUserRoute(req,res);
+});
+
 export { userRouter };
