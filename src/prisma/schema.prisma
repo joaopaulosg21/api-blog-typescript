@@ -10,10 +10,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
+model User {
   id Int @id @default(autoincrement())
   name String @db.VarChar(255)
   email String @unique @db.VarChar(255)
   password String @db.VarChar(255)
   role String @default("autor")
+  Post Post[]
+}
+
+model Post {
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(255)
+  createdAt DateTime @default(now())
+  content String @db.Text
+  published Boolean @default(false)
+  authorId Int
+  User User @relation(fields: [authorId],references: [id])
 }
