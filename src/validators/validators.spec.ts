@@ -18,7 +18,7 @@ describe("Testes para verifyUser",()=>{
         try{
             await verifyUser(data);
         }catch(e){
-            expect(e).toEqual(null)
+            expect(e).toEqual("User não possui todos os campos")
         }
     })
 })

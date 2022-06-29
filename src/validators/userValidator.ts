@@ -3,7 +3,7 @@ export function verifyUser(user:object){
         const arr = ["name","email","password"];
         for(let i = 0; i < arr.length; i++){
             if(user.hasOwnProperty(arr[i]) == false){
-                reject(null)
+                reject("User não possui todos os campos")
             }
         }
         resolve(true)

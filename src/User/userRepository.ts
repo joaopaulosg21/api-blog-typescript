@@ -16,4 +16,8 @@ export class UserRepository {
             }
         });
     }
+
+    public async returnEmail(email:string):Promise<user | null>{
+        return this.model.user.findUnique({where:{email:email}});
+    }
 }
