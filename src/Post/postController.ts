@@ -11,7 +11,8 @@ export class PostController {
 
     public async newPostRoute(req:Request,res:Response):Promise<Response>{
         const post:post = req.body;
-        const response:response = await this.postService.savePost(post);
+        const token:any = req.headers["authorization"]?.split(" ")[1];
+        const response:response = await this.postService.savePost(post,token);
         return res.status(response.status).json(response.msg);
     }
 }
