@@ -15,4 +15,9 @@ export class PostController {
         const response:response = await this.postService.savePost(post,token);
         return res.status(response.status).json(response.msg);
     }
+
+    public async getAllPostsRoute(req:Request,res:Response):Promise<Response>{
+        const response:response = await this.postService.getAllPosts();
+        return res.status(response.status).json(response.msg);
+    }
 }

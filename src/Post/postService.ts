@@ -19,4 +19,13 @@ export class PostService {
             return {status:500,msg:`${error}`};
         }
     }
+
+    public async getAllPosts():Promise<response>{
+        try{
+            const posts:post[] = await this.postRepository.getAll();
+            return {status:200,msg:posts}
+        }catch(error){
+            return {status:500,msg:`${error}`};
+        }
+    }
 }

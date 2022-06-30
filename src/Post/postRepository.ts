@@ -16,4 +16,8 @@ export class PostRepository {
             }
         });
     }
+
+    public async getAll():Promise<post[]>{
+        return this.model.post.findMany();
+    }
 }
