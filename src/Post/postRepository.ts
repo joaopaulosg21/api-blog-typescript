@@ -18,6 +18,8 @@ export class PostRepository {
     }
 
     public async getAll():Promise<post[]>{
-        return this.model.post.findMany();
+        return this.model.post.findMany({
+            where:{published:true}
+        });
     }
 }
