@@ -37,12 +37,8 @@ export class PostService {
             const id = await returnId(token);
             const user = await this.userRepository.returnUser(Number(id));
             if(user && user.role == "admin"){
-                const post = await this.postRepository.publishPost(postId);
-                if(post){
-                    return {status:200,msg:"Post atualizado!"};
-                }else{
-                    return {status:404,msg:"Post não existe!"}
-                }
+                await this.postRepository.publishPost(postId);
+                return {status:200,msg:"Post atualizado!"};
             }else{
                 return {status:401,msg:"Usuario não tem autorização para publicar o post!"}
             }
