@@ -20,4 +20,11 @@ export class PostController {
         const response:response = await this.postService.getAllPosts();
         return res.status(response.status).json(response.msg);
     }
+
+    public async publishPostRoute(req:Request,res:Response):Promise<Response>{
+        const postId:number = Number(req.params.id);
+        const token:any = req.headers["authorization"]?.split(" ")[1];
+        const response:response = await this.postService.publishPost(postId,token);
+        return res.status(response.status).json(response.msg);
+    }
 }

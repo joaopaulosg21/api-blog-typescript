@@ -1,12 +1,15 @@
 import { post } from "../types/post.interface";
 import { response } from "../types/response.interface";
+import { UserRepository } from "../User/userRepository";
 import { returnId } from "../validators/tokenValidator";
 import { PostRepository } from "./postRepository";
 
 export class PostService {
     private postRepository:PostRepository;
+    private userRepository:UserRepository;
     constructor(){
         this.postRepository = new PostRepository();
+        this.userRepository = new UserRepository();
     }
 
     public async savePost(post:post,token:string):Promise<response>{
@@ -24,6 +27,25 @@ export class PostService {
         try{
             const posts:post[] = await this.postRepository.getAll();
             return {status:200,msg:posts}
+        }catch(error){
+            return {status:500,msg:`${error}`};
+        }
+    }
+
+    public async publishPost(postId:number,token:string):Promise<response>{
+        try{
+            const id = await returnId(token);
+            const user = await this.userRepository.returnUser(Number(id));
+            if(user && user.role == "admin"){
+                const post = await this.postRepository.publishPost(postId);
+                if(post){
+                    return {status:200,msg:"Post atualizado!"};
+                }else{
+                    return {status:404,msg:"Post não existe!"}
+                }
+            }else{
+                return {status:401,msg:"Usuario não tem autorização para publicar o post!"}
+            }
         }catch(error){
             return {status:500,msg:`${error}`};
         }

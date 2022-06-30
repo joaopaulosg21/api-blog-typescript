@@ -24,4 +24,8 @@ export class UserRepository {
     public async login(email:string,password:string):Promise<user | null>{
         return this.model.user.findFirst({where:{email:email,password:password}});
     }
+
+    public async returnUser(userId:number):Promise<user | null>{
+        return this.model.user.findFirst({where:{id:userId}});
+    }
 }

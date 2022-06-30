@@ -22,4 +22,11 @@ export class PostRepository {
             where:{published:true}
         });
     }
+
+    public async publishPost(postId:number):Promise<post | null>{
+        return this.model.post.update({
+            where:{id:postId},
+            data:{published:true}
+        });
+    }
 }

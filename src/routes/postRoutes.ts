@@ -12,4 +12,8 @@ postRouter.get("/",(req,res)=>{
     post.getAllPostsRoute(req,res);
 });
 
+postRouter.put("/publishPost/:id",checkToken,(req,res)=>{
+    post.publishPostRoute(req,res);
+})
+
 export { postRouter };
