@@ -14,6 +14,10 @@ postRouter.get("/",(req,res)=>{
 
 postRouter.put("/publishPost/:id",checkToken,(req,res)=>{
     post.publishPostRoute(req,res);
-})
+});
+
+postRouter.get("/notPublishedPosts/",checkToken,(req,res)=>{
+    post.notPublishedPostsRoute(req,res);
+});
 
 export { postRouter };

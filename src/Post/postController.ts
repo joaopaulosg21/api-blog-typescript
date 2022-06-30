@@ -27,4 +27,10 @@ export class PostController {
         const response:response = await this.postService.publishPost(postId,token);
         return res.status(response.status).json(response.msg);
     }
+
+    public async notPublishedPostsRoute(req:Request,res:Response):Promise<Response>{
+        const token:any = req.headers["authorization"]?.split(" ")[1];
+        const response:response = await this.postService.notPublishedPosts(token);
+        return res.status(response.status).json(response.msg);
+    }
 }

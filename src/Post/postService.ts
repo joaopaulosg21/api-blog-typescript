@@ -46,4 +46,19 @@ export class PostService {
             return {status:500,msg:`${error}`};
         }
     }
+
+    public async notPublishedPosts(token:string):Promise<response>{
+        try{
+            const id = await returnId(token);
+            const user = await this.userRepository.returnUser(Number(id));
+            if(user && user.role == "admin"){
+                const posts = await this.postRepository.notPublishedPosts();
+                return {status:200,msg:posts};
+            }else{
+                return {status:401,msg:"Usuario não é admin"};
+            }
+        }catch(error){
+            return {status:500,msg:`${error}`};
+        }
+    }
 }

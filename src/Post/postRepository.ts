@@ -29,4 +29,10 @@ export class PostRepository {
             data:{published:true}
         });
     }
+
+    public async notPublishedPosts():Promise<post[]>{
+        return this.model.post.findMany({
+            where:{published:false}
+        });
+    }
 }
